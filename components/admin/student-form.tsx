@@ -35,6 +35,8 @@ interface StudentData {
   strengths: string
   weaknesses: string
   future_goals: string
+  sex?: string
+  blood_type?: string
   education_history: EducationEntry[]
   work_history: WorkEntry[]
 }
@@ -62,6 +64,8 @@ export function StudentForm({
       strengths: "",
       weaknesses: "",
       future_goals: "",
+      sex: "",
+      blood_type: "",
       education_history: [],
       work_history: [],
     },
@@ -188,8 +192,39 @@ export function StudentForm({
               />
             </div>
             <div>
+              <Label htmlFor="sex">Sex</Label>
+              <select
+                id="sex"
+                value={form.sex || ""}
+                onChange={(e) => handleInputChange("sex", e.target.value)}
+                className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground"
+              >
+                <option value="">Select sex...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
               <Label htmlFor="address">Address</Label>
               <Input id="address" value={form.address} onChange={(e) => handleInputChange("address", e.target.value)} />
+            </div>
+            <div>
+              <Label htmlFor="blood_type">Blood Type</Label>
+              <select
+                id="blood_type"
+                value={form.blood_type || ""}
+                onChange={(e) => handleInputChange("blood_type", e.target.value)}
+                className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground"
+              >
+                <option value="">Select blood type...</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
+                <option value="O">O</option>
+              </select>
             </div>
           </div>
 
