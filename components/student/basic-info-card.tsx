@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { Card } from "@/components/ui/card"
 
 interface StudentBasicInfoProps {
@@ -10,6 +11,7 @@ interface StudentBasicInfoProps {
   weight: number
   age: number
   bloodType?: string
+  sex?: string
   photoUrl?: string
 }
 
@@ -21,68 +23,92 @@ export function StudentBasicInfoCard({
   weight,
   age,
   bloodType,
+  sex,
   photoUrl,
 }: StudentBasicInfoProps) {
   return (
     <Card className="overflow-hidden">
       {/* Profile Photo */}
-      <div className="aspect-square overflow-hidden bg-muted">
+      <div className="relative w-64 h-64 mx-auto overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 rounded-lg">
         {photoUrl ? (
-          <img src={photoUrl || "/placeholder.svg"} alt={fullName} className="h-full w-full object-cover" />
+          <Image
+            src={photoUrl || "/placeholder.svg"}
+            alt={fullName}
+            width={256}
+            height={256}
+            className="object-cover w-full h-full"
+            quality={95}
+            priority={true}
+          />
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <span className="text-6xl text-muted-foreground">👤</span>
+          <div className="flex items-center justify-center h-full w-full">
+            <span className="text-8xl">👤</span>
           </div>
         )}
       </div>
 
       {/* Basic Information */}
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-foreground">{fullName}</h1>
+      <div className="p-6 space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground mb-1">{fullName}</h1>
+          <p className="text-sm text-muted-foreground">学生プロフィール</p>
+        </div>
 
-        <div className="mt-6 space-y-4">
+        <div className="space-y-4">
           {/* Name */}
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">氏名</p>
-            <p className="text-foreground">{fullName}</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-muted-foreground w-20">氏名</p>
+            <p className="text-foreground text-right flex-1">{fullName}</p>
           </div>
 
           {/* Date of Birth */}
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">生年月日</p>
-            <p className="text-foreground">{new Date(dateOfBirth).toLocaleDateString("ja-JP")}</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-muted-foreground w-20">生年月日</p>
+            <p className="text-foreground text-right flex-1">{new Date(dateOfBirth).toLocaleDateString("ja-JP")}</p>
           </div>
 
+          {/* Sex */}
+          {sex && (
+            <div className="flex justify-between items-start">
+              <p className="text-sm font-medium text-muted-foreground w-20">性別</p>
+              <p className="text-foreground text-right flex-1">
+                {sex === "Male" ? "男" : sex === "Female" ? "女" : sex}
+              </p>
+            </div>
+          )}
+
           {/* Age */}
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">年齢</p>
-            <p className="text-foreground">{age}歳</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-muted-foreground w-20">年齢</p>
+            <p className="text-foreground text-right flex-1">{age}歳</p>
           </div>
 
           {/* Height */}
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">身長</p>
-            <p className="text-foreground">{height} cm</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-muted-foreground w-20">身長</p>
+            <p className="text-foreground text-right flex-1">{height} cm</p>
           </div>
 
           {/* Weight */}
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">体重</p>
-            <p className="text-foreground">{weight} kg</p>
+          <div className="flex justify-between items-start">
+            <p className="text-sm font-medium text-muted-foreground w-20">体重</p>
+            <p className="text-foreground text-right flex-1">{weight} kg</p>
           </div>
 
           {/* Blood Type */}
           {bloodType && (
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">血液型</p>
-              <p className="text-foreground font-semibold">{bloodType}</p>
+            <div className="flex justify-between items-start">
+              <p className="text-sm font-medium text-muted-foreground w-20">血液型</p>
+              <p className="text-foreground font-semibold text-right flex-1 bg-blue-50 dark:bg-blue-950/30 px-3 py-1 rounded-full text-sm">
+                {bloodType}
+              </p>
             </div>
           )}
 
           {/* Address */}
           <div className="pt-4 border-t border-border">
-            <p className="text-sm font-medium text-muted-foreground">住所</p>
-            <p className="text-foreground mt-1">{address}</p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">住所</p>
+            <p className="text-foreground leading-relaxed">{address}</p>
           </div>
         </div>
       </div>

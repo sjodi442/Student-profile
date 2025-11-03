@@ -49,6 +49,7 @@ export default async function StudentDetailPage({
                 weight={student.weight}
                 age={age}
                 bloodType={student.blood_type}
+                sex={student.sex}
                 photoUrl={student.photo_url}
               />
             </div>

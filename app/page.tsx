@@ -61,9 +61,7 @@ export default async function HomePage() {
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {students.map((student) => (
-              <Link key={student.id} href={`/student/${student.id}`} className="transition-transform hover:scale-105">
-                <StudentCard student={student} />
-              </Link>
+              <StudentCard key={student.id} student={student} />
             ))}
           </div>
         )}
