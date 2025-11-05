@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { StudentTable } from "@/components/admin/student-table"
 import { Spinner } from "@/components/ui/spinner"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function AdminDashboard() {
   const [students, setStudents] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [sortBy, setSortBy] = useState<"name" | "class">("name")
   const router = useRouter()
 
   useEffect(() => {
@@ -31,6 +33,14 @@ export default function AdminDashboard() {
       setLoading(false)
     }
   }
+
+  const sortedStudents = [...students].sort((a, b) => {
+    if (sortBy === "name") {
+      return a.full_name.localeCompare(b.full_name, "ja")
+    } else {
+      return a.class_name.localeCompare(b.class_name, "ja")
+    }
+  })
 
   const handleLogout = async () => {
     await fetch("/api/admin/logout", { method: "POST" })
@@ -71,9 +81,23 @@ export default function AdminDashboard() {
             <Spinner />
           </div>
         ) : (
-          <Card className="overflow-hidden">
-            <StudentTable students={students} onRefresh={fetchStudents} />
-          </Card>
+          <>
+            <div className="mb-4 flex items-center gap-3">
+              <span className="text-sm font-medium text-foreground">Sort by:</span>
+              <Select value={sortBy} onValueChange={(value) => setSortBy(value as "name" | "class")}>
+                <SelectTrigger className="w-48">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name (氏名)</SelectItem>
+                  <SelectItem value="class">Class (クラス)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Card className="overflow-hidden">
+              <StudentTable students={sortedStudents} onRefresh={fetchStudents} />
+            </Card>
+          </>
         )}
       </div>
     </main>
