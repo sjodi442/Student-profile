@@ -41,6 +41,8 @@ export function StudentTable({ students, onRefresh }: { students: any[]; onRefre
           <TableHead>Class</TableHead>
           <TableHead>Sex</TableHead>
           <TableHead>Blood Type</TableHead>
+          <TableHead>JFT Score</TableHead>
+          <TableHead>SSW Score</TableHead>
           <TableHead>Date of Birth</TableHead>
           <TableHead className="text-right">Actions</TableHead>
         </TableRow>
@@ -52,6 +54,8 @@ export function StudentTable({ students, onRefresh }: { students: any[]; onRefre
             <TableCell>{student.class_name}</TableCell>
             <TableCell>{student.sex === "Male" ? "男" : student.sex === "Female" ? "女" : "-"}</TableCell>
             <TableCell>{student.blood_type || "-"}</TableCell>
+            <TableCell>{student.jft_score || "-"}</TableCell>
+            <TableCell>{student.ssw_score || "-"}</TableCell>
             <TableCell>{student.date_of_birth ? new Date(student.date_of_birth).toLocaleDateString() : "-"}</TableCell>
             <TableCell className="text-right">
               <div className="flex justify-end gap-2">

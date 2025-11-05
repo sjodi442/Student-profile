@@ -59,6 +59,18 @@ export function StudentCard({ student }: { student: any }) {
                   </p>
                 )}
               </div>
+              <div className="flex gap-2 flex-wrap pt-1">
+                {student.jft_score !== undefined && student.jft_score !== null && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 font-medium">
+                    JFT: {student.jft_score}
+                  </span>
+                )}
+                {student.ssw_score !== undefined && student.ssw_score !== null && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 font-medium">
+                    SSW: {student.ssw_score}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>

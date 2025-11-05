@@ -37,6 +37,8 @@ interface StudentData {
   future_goals: string
   sex?: string
   blood_type?: string
+  jft_score?: number
+  ssw_score?: number
   education_history: EducationEntry[]
   work_history: WorkEntry[]
 }
@@ -66,6 +68,8 @@ export function StudentForm({
       future_goals: "",
       sex: "",
       blood_type: "",
+      jft_score: 0,
+      ssw_score: 0,
       education_history: [],
       work_history: [],
     },
@@ -245,6 +249,31 @@ export function StudentForm({
                 type="number"
                 value={form.weight || ""}
                 onChange={(e) => handleInputChange("weight", Number.parseInt(e.target.value) || 0)}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label htmlFor="jft_score">JFT Score</Label>
+              <Input
+                id="jft_score"
+                type="number"
+                min="0"
+                max="999"
+                value={form.jft_score || ""}
+                onChange={(e) => handleInputChange("jft_score", Number.parseInt(e.target.value) || 0)}
+              />
+            </div>
+            <div>
+              <Label htmlFor="ssw_score">SSW Score</Label>
+              <Input
+                id="ssw_score"
+                type="number"
+                min="0"
+                max="999"
+                value={form.ssw_score || ""}
+                onChange={(e) => handleInputChange("ssw_score", Number.parseInt(e.target.value) || 0)}
               />
             </div>
           </div>
