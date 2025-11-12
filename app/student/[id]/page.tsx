@@ -51,6 +51,9 @@ export default async function StudentDetailPage({
                 bloodType={student.blood_type}
                 sex={student.sex}
                 photoUrl={student.photo_url}
+                jftScore={student.jft_score}
+                sswScore={student.ssw_score}
+                sswJobCategory={student.ssw_job_category}
               />
             </div>
 

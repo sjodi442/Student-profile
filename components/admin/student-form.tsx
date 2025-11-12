@@ -39,6 +39,7 @@ interface StudentData {
   blood_type?: string
   jft_score?: number
   ssw_score?: number
+  ssw_job_category?: string
   education_history: EducationEntry[]
   work_history: WorkEntry[]
 }
@@ -70,6 +71,7 @@ export function StudentForm({
       blood_type: "",
       jft_score: 0,
       ssw_score: 0,
+      ssw_job_category: "",
       education_history: [],
       work_history: [],
     },
@@ -276,6 +278,21 @@ export function StudentForm({
                 onChange={(e) => handleInputChange("ssw_score", Number.parseInt(e.target.value) || 0)}
               />
             </div>
+          </div>
+
+          <div>
+            <Label htmlFor="ssw_job_category">SSW Job Category</Label>
+            <select
+              id="ssw_job_category"
+              value={form.ssw_job_category || ""}
+              onChange={(e) => handleInputChange("ssw_job_category", e.target.value)}
+              className="w-full px-3 py-2 rounded-md border border-input bg-background text-foreground"
+            >
+              <option value="">Select job category...</option>
+              <option value="介護">介護 (Care/Nursing)</option>
+              <option value="飲食製造業">飲食製造業 (Food Manufacturing)</option>
+              <option value="外食">外食 (Food Service)</option>
+            </select>
           </div>
         </div>
       </Card>

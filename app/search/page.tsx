@@ -6,15 +6,37 @@ import { SearchBar } from "@/components/search-bar"
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>
+  searchParams: Promise<{ q?: string; category?: string; sex?: string }>
 }) {
-  const { q } = await searchParams
+  const { q, category, sex } = await searchParams
   const supabase = await createClient()
 
   let students = []
-  if (q) {
-    const { data } = await supabase.from("students").select("*").or(`full_name.ilike.%${q}%,class_name.ilike.%${q}%`)
-    students = data || []
+  if (q || category || sex) {
+    const query = supabase.from("students").select("*")
+
+    const filters: string[] = []
+
+    if (q) {
+      filters.push(`or(full_name.ilike.%${q}%,class_name.ilike.%${q}%)`)
+    }
+
+    if (category) {
+      filters.push(`ssw_job_category.eq.${category}`)
+    }
+
+    if (sex) {
+      filters.push(`sex.eq.${sex}`)
+    }
+
+    // Apply filters
+    if (filters.length > 0) {
+      const filterString = filters.join(",")
+      const result = await query.or(filterString)
+      students = result.data || []
+    } else {
+      students = []
+    }
   }
 
   return (
@@ -25,9 +47,11 @@ export default async function SearchPage({
             ← Back to Directory
           </Link>
           <h1 className="text-3xl font-bold text-foreground">Search Results</h1>
-          {q && (
+          {(q || category || sex) && (
             <p className="mt-2 text-muted-foreground">
-              Results for "{q}" ({students.length} found)
+              Results {q && `for "${q}"`}
+              {category && ` in ${category}`}
+              {sex && ` - ${sex}`} ({students.length} found)
             </p>
           )}
         </div>
@@ -43,15 +67,15 @@ export default async function SearchPage({
         {students.length === 0 ? (
           <div className="rounded-lg border border-dashed border-border bg-card/50 px-6 py-12 text-center">
             <p className="text-muted-foreground">
-              {q ? "No students found matching your search." : "Enter a search term to find students."}
+              {q || category || sex
+                ? "No students found matching your search criteria."
+                : "Enter search terms or select filters to find students."}
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {students.map((student) => (
-              <Link key={student.id} href={`/student/${student.id}`} className="transition-transform hover:scale-105">
-                <StudentCard student={student} />
-              </Link>
+              <StudentCard key={student.id} student={student} />
             ))}
           </div>
         )}

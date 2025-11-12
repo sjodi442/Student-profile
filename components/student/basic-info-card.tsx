@@ -15,6 +15,7 @@ interface StudentBasicInfoProps {
   photoUrl?: string
   jftScore?: number
   sswScore?: number
+  sswJobCategory?: string
 }
 
 export function StudentBasicInfoCard({
@@ -29,6 +30,7 @@ export function StudentBasicInfoCard({
   photoUrl,
   jftScore,
   sswScore,
+  sswJobCategory,
 }: StudentBasicInfoProps) {
   return (
     <Card className="overflow-hidden">
@@ -72,6 +74,13 @@ export function StudentBasicInfoCard({
                 <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">{sswScore}</p>
               </div>
             )}
+          </div>
+        )}
+
+        {sswJobCategory && (
+          <div className="p-3 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 rounded-lg border border-orange-100 dark:border-orange-900">
+            <p className="text-xs font-medium text-muted-foreground mb-1">SSW職種</p>
+            <p className="text-lg font-bold text-orange-600 dark:text-orange-400">{sswJobCategory}</p>
           </div>
         )}
 

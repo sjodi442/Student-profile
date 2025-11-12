@@ -60,6 +60,11 @@ export function StudentCard({ student }: { student: any }) {
                 )}
               </div>
               <div className="flex gap-2 flex-wrap pt-1">
+                {student.ssw_job_category && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-200 font-medium text-xs">
+                    {student.ssw_job_category}
+                  </span>
+                )}
                 {student.jft_score !== undefined && student.jft_score !== null && (
                   <span className="inline-flex items-center px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 font-medium">
                     JFT: {student.jft_score}
