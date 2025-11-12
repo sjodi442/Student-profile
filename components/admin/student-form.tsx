@@ -38,7 +38,6 @@ interface StudentData {
   sex?: string
   blood_type?: string
   jft_score?: number
-  ssw_score?: number
   ssw_job_category?: string
   education_history: EducationEntry[]
   work_history: WorkEntry[]
@@ -70,7 +69,6 @@ export function StudentForm({
       sex: "",
       blood_type: "",
       jft_score: 0,
-      ssw_score: 0,
       ssw_job_category: "",
       education_history: [],
       work_history: [],
@@ -265,17 +263,6 @@ export function StudentForm({
                 max="999"
                 value={form.jft_score || ""}
                 onChange={(e) => handleInputChange("jft_score", Number.parseInt(e.target.value) || 0)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="ssw_score">SSW Score</Label>
-              <Input
-                id="ssw_score"
-                type="number"
-                min="0"
-                max="999"
-                value={form.ssw_score || ""}
-                onChange={(e) => handleInputChange("ssw_score", Number.parseInt(e.target.value) || 0)}
               />
             </div>
           </div>

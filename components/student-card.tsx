@@ -70,11 +70,7 @@ export function StudentCard({ student }: { student: any }) {
                     JFT: {student.jft_score}
                   </span>
                 )}
-                {student.ssw_score !== undefined && student.ssw_score !== null && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200 font-medium">
-                    SSW: {student.ssw_score}
-                  </span>
-                )}
+                {/* Removed SSW score badge */}
               </div>
             </div>
           </div>

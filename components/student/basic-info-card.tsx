@@ -14,7 +14,6 @@ interface StudentBasicInfoProps {
   sex?: string
   photoUrl?: string
   jftScore?: number
-  sswScore?: number
   sswJobCategory?: string
 }
 
@@ -29,7 +28,6 @@ export function StudentBasicInfoCard({
   sex,
   photoUrl,
   jftScore,
-  sswScore,
   sswJobCategory,
 }: StudentBasicInfoProps) {
   return (
@@ -60,18 +58,12 @@ export function StudentBasicInfoCard({
           <p className="text-sm text-muted-foreground">学生プロフィール</p>
         </div>
 
-        {(jftScore !== undefined || sswScore !== undefined) && (
-          <div className="grid grid-cols-2 gap-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg border border-blue-100 dark:border-blue-900">
+        {jftScore !== undefined && (
+          <div className="grid grid-cols-1 gap-3 p-4 bg-gradient-to-r from-blue-50 to-blue-50 dark:from-blue-950/20 dark:to-blue-950/20 rounded-lg border border-blue-100 dark:border-blue-900">
             {jftScore !== undefined && jftScore !== 0 && (
               <div className="text-center">
                 <p className="text-xs font-medium text-muted-foreground mb-1">JFT スコア</p>
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{jftScore}</p>
-              </div>
-            )}
-            {sswScore !== undefined && sswScore !== 0 && (
-              <div className="text-center">
-                <p className="text-xs font-medium text-muted-foreground mb-1">SSW スコア</p>
-                <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">{sswScore}</p>
               </div>
             )}
           </div>
