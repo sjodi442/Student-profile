@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-const ACCESS_CODE = '@saindo05'
+const ACCESS_CODE = 'saindo05'
 const STORAGE_KEY = 'access_code_verified'
 
 export function useAccessCode() {
